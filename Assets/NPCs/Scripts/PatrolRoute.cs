@@ -57,7 +57,6 @@ public class PatrolRoute : MonoBehaviour
             if (indexOfCurrentNode == 0)
             {
                 isGoingBack = false;
-                Debug.LogWarning($"RETURNING: {1}");
                 return nodes[1];
             }
 
@@ -68,10 +67,8 @@ public class PatrolRoute : MonoBehaviour
         
             if (isGoingBack)
             {
-                Debug.LogWarning($"RETURNING: {indexOfCurrentNode - 1}");
                 return nodes[indexOfCurrentNode - 1];
             }
-            Debug.LogWarning($"RETURNING: {(indexOfCurrentNode == (nodes.Count - 1) ? 0 : indexOfCurrentNode + 1)}");
             return indexOfCurrentNode == nodes.Count - 1 ? nodes[0] : nodes[indexOfCurrentNode + 1];
         }
 

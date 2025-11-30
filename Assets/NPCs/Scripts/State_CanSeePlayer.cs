@@ -29,18 +29,15 @@ namespace NPCs.Scripts
         public override void UpdateState()
         {
             bool canSeePlayer = _vision.CanSeeObjectWithTag("Player");
-            Debug.LogWarning($"CANSEEPLAYER: {canSeePlayer}");
             _currentTimeToSeePlayer = _currentTimeToSeePlayer += canSeePlayer ? Time.deltaTime : -Time.deltaTime;
             Mathf.Clamp(_currentTimeToSeePlayer,0, timeToSeePlayer);
             if(canSeePlayer) RotateTowardsPlayer();
             if (_currentTimeToSeePlayer <= 0)
             {
-                Debug.LogWarning($"VISUAL CONTACT LOST");
                 _stateManager.SetState(_stateToReturnTo);
             }
             else if (_currentTimeToSeePlayer >= timeToSeePlayer)
             {
-                Debug.LogWarning($"BAR FILLED, CHASING");
                 _stateManager.SetState(Enum_GuardStates.Chase);
             }
         }

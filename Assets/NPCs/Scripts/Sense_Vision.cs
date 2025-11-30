@@ -28,6 +28,8 @@ namespace NPCs.Scripts
         private List<Transform> _objectsInFOV = new();
         private List<Transform> _seenObjects = new();
 
+        [SerializeField] private bool debuggingPlayerSeen = false;
+
         private void Start()
         {
             GenerateViewCone();
@@ -36,6 +38,7 @@ namespace NPCs.Scripts
         private void FixedUpdate()
         {
             if(_objectsInFOV.Count > 0) RaycastToTrackedObjects();
+            if(debuggingPlayerSeen) DebuggingPlayerSeen();
         }
 
         private void GenerateViewCone()
@@ -78,6 +81,7 @@ namespace NPCs.Scripts
             //SEND OUT A RAYCAST AND PUT THE HIT TO hit
             if (Physics.Raycast(transform.position, t.position - transform.position, out RaycastHit hit))
             {
+                Debug.DrawLine(transform.position, hit.point, Color.red);
                 if (hit.transform == t && !_seenObjects.Contains(t))
                 {
                     _seenObjects.Add(t);
@@ -89,6 +93,7 @@ namespace NPCs.Scripts
             }
             else
             {
+                Debug.DrawLine(transform.position, hit.point, Color.green);
                 _seenObjects.Remove(t);
             }
         }
@@ -114,6 +119,20 @@ namespace NPCs.Scripts
         public void SetVisionConeColor(Color c)
         {
             meshRenderer.material.color = c;
+        }
+
+        private void DebuggingPlayerSeen()
+        {
+            if (CanSeeObjectWithTag("Player"))
+            {
+                Debug.LogWarning("Can see player");
+                SetVisionConeColor(Color.yellow);
+            }
+            else
+            {
+                Debug.LogWarning("Can't see player");
+                SetVisionConeColor(Color.green);
+            }
         }
     }
 }

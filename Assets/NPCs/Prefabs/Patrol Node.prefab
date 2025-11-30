@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PatrolNode
   waitAtNode: 1
   route: {fileID: 0}
-  PatrolNodePrefab: {fileID: 0}
+  PatrolNodePrefab: {fileID: 5848674137447324530}
