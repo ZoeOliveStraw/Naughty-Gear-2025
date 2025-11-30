@@ -59,7 +59,7 @@ namespace NPCs.Scripts
                 return;
             }
         
-            if (route.NodeCount() <= 1)
+                if (route.NodeCount() <= 1)
             {
                 isStopped = true;
                 return;

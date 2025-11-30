@@ -29,7 +29,7 @@ namespace Character.Scripts
             }
             else if(playerRaycasts.IsGrounded)
             {
-                Debug.LogWarning("TRUE");
+                //Debug.LogWarning("TRUE");
                 //_currentVerticalVelocity = Mathf.Clamp(_currentVerticalVelocity - gravityPerSecond * Time.deltaTime, -1f, jumpForce);
             }
             
@@ -37,8 +37,6 @@ namespace Character.Scripts
             velocity.y = _currentVerticalVelocity * Time.deltaTime;
             playerMovement.MoveCharacter(velocity);
             _currentVerticalVelocity -= gravityPerSecond * Time.deltaTime;
-            
-            Debug.LogWarning($"Current vertical velocity: {_currentVerticalVelocity}");
         }
         
         private void OnEnable()

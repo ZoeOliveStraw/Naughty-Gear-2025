@@ -18,6 +18,7 @@ public class PatrolNode : MonoBehaviour
     public void ConfigureNode(PatrolNode node)
     {
         route = node.route;
+        PatrolNodePrefab = node.PatrolNodePrefab;
         transform.SetParent(route.transform);
         route.Initialize();
     }

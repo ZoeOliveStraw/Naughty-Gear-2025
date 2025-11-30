@@ -35,6 +35,7 @@ namespace NPCs.Scripts
             if(canSeePlayer) RotateTowardsPlayer();
             if (_currentTimeToSeePlayer <= 0)
             {
+                Debug.LogWarning($"VISUAL CONTACT LOST");
                 _stateManager.SetState(_stateToReturnTo);
             }
             else if (_currentTimeToSeePlayer >= timeToSeePlayer)
