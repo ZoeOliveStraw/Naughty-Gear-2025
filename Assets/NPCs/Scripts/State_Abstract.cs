@@ -9,15 +9,15 @@ namespace NPCs.Scripts
         protected NavMeshAgent _navMeshAgent;
         protected Animator _animator;
         protected Transform _transform;
-        protected State_Manager _stateManager;
+        protected GuardStateController GuardStateController;
     
         // Start is called once before the first execution of Update after the MonoBehaviour is created
-        public virtual void EnterState(State_Manager manager)
+        public virtual void EnterState(GuardStateController controller)
         {
-            _vision = manager.senseVision;
-            _stateManager = manager;
-            _navMeshAgent = manager.navAgent;
-            _transform = manager.transform;
+            _vision = controller.senseVision;
+            GuardStateController = controller;
+            _navMeshAgent = controller.navAgent;
+            _transform = controller.transform;
         }
 
         // Update is called once per frame

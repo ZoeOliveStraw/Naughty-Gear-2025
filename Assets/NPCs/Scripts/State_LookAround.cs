@@ -18,14 +18,14 @@ namespace NPCs.Scripts
         private float _currentWaitTime = 0;
         private Coroutine _coroutine;
     
-        public override void EnterState(State_Manager manager)
+        public override void EnterState(GuardStateController controller)
         {
             _hasLookedOnce = false;
             _isWaiting = false;
-            base.EnterState(manager);
+            base.EnterState(controller);
             float coin = Random.Range(0f, 1f);
             _vision.SetVisionConeColor(visionConeColor);
-            _stateManager.timeToSeePlayer = timeToSeesPlayer;
+            GuardStateController.timeToSeePlayer = timeToSeesPlayer;
             SetLeftAndrightTarget();
             _coroutine = StartCoroutine(WhatDo());
             _navMeshAgent.isStopped = true;
@@ -43,7 +43,7 @@ namespace NPCs.Scripts
             base.UpdateState();
             if (_vision.CanSeeObjectWithTag("Player"))
             {
-                _stateManager.SetState(Enum_GuardStates.CanSeePlayer);
+                GuardStateController.SetState(Enum_GuardStates.CanSeePlayer);
             }
         }
     
@@ -62,7 +62,7 @@ namespace NPCs.Scripts
                 yield return new WaitForEndOfFrame();
             }
             yield return new WaitForSeconds(durationOfCheck);
-            _stateManager.SetState(Enum_GuardStates.Searching);
+            GuardStateController.SetState(Enum_GuardStates.Searching);
         }
 
         public override void ExitState()

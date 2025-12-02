@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace NPCs.Scripts
 {
-    public class State_Manager : MonoBehaviour
+    public class GuardStateController : MonoBehaviour
     {   
         [SerializeField] private State_Abstract patrolState;
         [SerializeField] private State_Abstract canSeePlayerState;

@@ -14,10 +14,10 @@ namespace NPCs.Scripts
         private bool isGoingBack;
         private bool isStopped;
     
-        public override void EnterState(State_Manager manager)
+        public override void EnterState(GuardStateController controller)
         {
-            base.EnterState(manager);
-            _stateManager.timeToSeePlayer = timeToSeesPlayer;
+            base.EnterState(controller);
+            GuardStateController.timeToSeePlayer = timeToSeesPlayer;
             _navMeshAgent.speed = moveSpeed;
             NavigateToNextNode();
             _vision.SetVisionConeColor(visionConeColor);
@@ -30,7 +30,7 @@ namespace NPCs.Scripts
 
             if (_vision.CanSeeObjectWithTag("Player"))
             {
-                _stateManager.SetState(Enum_GuardStates.CanSeePlayer);
+                GuardStateController.SetState(Enum_GuardStates.CanSeePlayer);
             }
         
             if (isStopped) return;
@@ -53,9 +53,9 @@ namespace NPCs.Scripts
     
         private void NavigateToNextNode()
         {
-            if (_currentNode == null && _stateManager._currentNodeTarget != null)
+            if (_currentNode == null && GuardStateController._currentNodeTarget != null)
             {
-                _currentNode = _stateManager._currentNodeTarget;
+                _currentNode = GuardStateController._currentNodeTarget;
                 return;
             }
         
@@ -72,7 +72,7 @@ namespace NPCs.Scripts
         public override void ExitState()
         {
             base.ExitState();
-            _stateManager._currentNodeTarget = _currentNode;
+            GuardStateController._currentNodeTarget = _currentNode;
         }
     }
 }

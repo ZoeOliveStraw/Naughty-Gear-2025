@@ -11,9 +11,9 @@ namespace NPCs.Scripts
         private Transform _playerTransform;
         private Vector3 _lastKnownPlayerPosition;
     
-        public override void EnterState(State_Manager manager)
+        public override void EnterState(GuardStateController controller)
         {
-            base.EnterState(manager);
+            base.EnterState(controller);
             _navMeshAgent.speed = moveSpeed;
             SetPlayerReference();
             _vision.SetVisionConeColor(visionConeColor);
@@ -33,7 +33,7 @@ namespace NPCs.Scripts
                 else
                 {
                     Debug.LogWarning("PLAYER LOST, EXITING STATE");
-                    _stateManager.SetState(Enum_GuardStates.LookAround);
+                    GuardStateController.SetState(Enum_GuardStates.LookAround);
                 }
             }
         }

@@ -11,16 +11,16 @@ namespace NPCs.Scripts
         private Transform _playerTransform;
         [SerializeField] private Color visionConeColor;
     
-        public override void EnterState(State_Manager manager)
+        public override void EnterState(GuardStateController controller)
         {
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         
-            base.EnterState(manager);
-            timeToSeePlayer = _stateManager.timeToSeePlayer;
-            timeToSeePlayer = _stateManager.timeToSeePlayer;
+            base.EnterState(controller);
+            timeToSeePlayer = GuardStateController.timeToSeePlayer;
+            timeToSeePlayer = GuardStateController.timeToSeePlayer;
             _currentTimeToSeePlayer = 0;
-            _stateToReturnTo = _stateManager.previousState;
+            _stateToReturnTo = GuardStateController.previousState;
             _vision.SetVisionConeColor(visionConeColor);
             _navMeshAgent.isStopped = true;
         }
@@ -34,11 +34,11 @@ namespace NPCs.Scripts
             if(canSeePlayer) RotateTowardsPlayer();
             if (_currentTimeToSeePlayer <= 0)
             {
-                _stateManager.SetState(_stateToReturnTo);
+                GuardStateController.SetState(_stateToReturnTo);
             }
             else if (_currentTimeToSeePlayer >= timeToSeePlayer)
             {
-                _stateManager.SetState(Enum_GuardStates.Chase);
+                GuardStateController.SetState(Enum_GuardStates.Chase);
             }
         }
 

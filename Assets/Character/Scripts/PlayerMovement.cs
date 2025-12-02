@@ -9,7 +9,7 @@ namespace Character.Scripts
         [SerializeField] private CharacterController controller;
         [SerializeField] private Transform cameraTransform;
     
-        [SerializeField] private float movementSpeed = 5f;
+        public float movementSpeed = 5f;
         [SerializeField] private float rotationSpeed = 5f;
         [SerializeField] private float jumpForce = 5f;
     
@@ -44,8 +44,7 @@ namespace Character.Scripts
             //Apply movement
             moveDir = forward * inputVector.y + right * inputVector.x;
             MoveCharacter(moveDir * movementSpeed * Time.deltaTime);
-        
-            //Rotate character
+            
             if (inputVector != Vector2.zero)
             {
                 Quaternion target = Quaternion.LookRotation(moveDir);

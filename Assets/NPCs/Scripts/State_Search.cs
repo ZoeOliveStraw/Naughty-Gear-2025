@@ -17,11 +17,11 @@ namespace NPCs.Scripts
         private bool _isWaiting;
         private float _currentStopDuration;
 
-        public override void EnterState(State_Manager manager)
+        public override void EnterState(GuardStateController controller)
         {
-            base.EnterState(manager);
-            _searchDuration = _stateManager.timeToSearch;
-            _stateManager.timeToSeePlayer = timeToSeesPlayer;
+            base.EnterState(controller);
+            _searchDuration = GuardStateController.timeToSearch;
+            GuardStateController.timeToSeePlayer = timeToSeesPlayer;
             _navMeshAgent.speed = moveSpeed;
             _vision.SetVisionConeColor(visionConeColor);
             _startPosition = transform.position;
@@ -32,7 +32,7 @@ namespace NPCs.Scripts
         {
             if (_vision.CanSeeObjectWithTag("Player"))
             {
-                _stateManager.SetState(Enum_GuardStates.CanSeePlayer);
+                GuardStateController.SetState(Enum_GuardStates.CanSeePlayer);
             }
         
             if (_timeElapsed == 0)
@@ -60,7 +60,7 @@ namespace NPCs.Scripts
 
             if (_timeElapsed >= _searchDuration && _navMeshAgent.remainingDistance == 0)
             {
-                _stateManager.SetState(Enum_GuardStates.Patrol);
+                GuardStateController.SetState(Enum_GuardStates.Patrol);
             }
             _timeElapsed += Time.deltaTime;
         }

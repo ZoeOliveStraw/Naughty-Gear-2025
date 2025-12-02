@@ -14,11 +14,11 @@ namespace NPCs.Scripts
         private Vector3 _targetPosition;
         private bool _hasStartedLooking;
     
-        public override void EnterState(State_Manager manager)
+        public override void EnterState(GuardStateController controller)
         {
-            base.EnterState(manager);
+            base.EnterState(controller);
             _vision.SetVisionConeColor(visionConeColor);
-            _stateManager.timeToSeePlayer = timeToSeePlayer;
+            GuardStateController.timeToSeePlayer = timeToSeePlayer;
         }
 
         public override void UpdateState()
@@ -27,7 +27,7 @@ namespace NPCs.Scripts
 
             if (_vision.CanSeeObjectWithTag("Player"))
             {
-                _stateManager.SetState(Enum_GuardStates.CanSeePlayer);
+                GuardStateController.SetState(Enum_GuardStates.CanSeePlayer);
             }
         
             if (_coroutine == null)
@@ -38,7 +38,7 @@ namespace NPCs.Scripts
 
         private IEnumerator LookAround()
         {
-            _targetPosition = _stateManager.InvestigationTarget;
+            _targetPosition = GuardStateController.InvestigationTarget;
             _navMeshAgent.isStopped = true;
             while (RotateTowardTarget(_targetPosition, rotationSpeed) > 0.1f)
             {
@@ -68,7 +68,7 @@ namespace NPCs.Scripts
             }
             yield return new WaitForSeconds(durationOfWait);
         
-            _stateManager.SetState(Enum_GuardStates.Patrol);
+            GuardStateController.SetState(Enum_GuardStates.Patrol);
         }
 
         public override void ExitState()
