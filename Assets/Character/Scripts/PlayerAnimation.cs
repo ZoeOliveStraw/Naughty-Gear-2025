@@ -14,7 +14,7 @@ namespace Character.Scripts
             Vector3 flatMomentum = characterController.velocity;
             flatMomentum.y = 0;
             animator.SetFloat("MoveSpeed", flatMomentum.magnitude);
-            animator.SetBool("IsGrounded", playerRaycasts.IsGrounded);
+            //animator.SetBool("IsGrounded", playerRaycasts.IsGrounded);
         }
     }
 }
