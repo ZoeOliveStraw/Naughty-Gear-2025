@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Character.Scripts;
 using UnityEngine;
 
 namespace NPCs.Scripts
@@ -78,24 +79,24 @@ namespace NPCs.Scripts
 
         private void CheckIfObjectSeen(Transform t)
         {
+            List<Transform> detectionPoints = t.gameObject.GetComponent<DetectableObject>().detectionPoints;
             //SEND OUT A RAYCAST AND PUT THE HIT TO hit
-            if (Physics.Raycast(transform.position, t.position - transform.position, out RaycastHit hit))
+            foreach (Transform dp in detectionPoints)
             {
-                Debug.DrawLine(transform.position, hit.point, Color.red);
-                if (hit.transform == t && !_seenObjects.Contains(t))
+                if (Physics.Raycast(transform.position, dp.position - transform.position, out RaycastHit hit))
                 {
-                    _seenObjects.Add(t);
-                }
-                else if (hit.transform != t && _seenObjects.Contains(t))
-                {
-                    _seenObjects.Remove(t);
+                    Debug.DrawLine(transform.position, hit.point, Color.red);
+                    if (hit.transform == t)
+                    {
+                        if (!_seenObjects.Contains(t))
+                        {
+                            _seenObjects.Add(t);
+                        }
+                        return;
+                    }
                 }
             }
-            else
-            {
-                Debug.DrawLine(transform.position, hit.point, Color.green);
-                _seenObjects.Remove(t);
-            }
+            _seenObjects.Remove(t);
         }
 
         public bool CanSeeObjectWithTag(string tagToCheck)

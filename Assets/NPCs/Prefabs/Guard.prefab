@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCs.Scripts.State_LookAround
   visionConeColor: {r: 1, g: 0.53481376, b: 0, a: 0.7529412}
-  durationOfCheck: 12
+  durationOfCheck: 2
   timeToSeesPlayer: 0.5
   rotationSpeed: 10
 --- !u!114 &6594437959770127863

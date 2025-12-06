@@ -7,13 +7,15 @@ namespace Character.Scripts
     {
         protected PlayerStateController _stateController;
         protected InputSystem_Actions _input;
-        protected CapsuleCollider _capsuleCollider;
+        protected BoxCollider _boxCollider;
         protected CharacterController _characterController;
         protected PlayerRaycasts _playerRaycasts;
         protected Animator _animator;
         protected PlayerMovement _playerMovement;
 
         [SerializeField] public float moveSpeed = 5;
+        [SerializeField] private Vector3 colliderDimensions;
+        [SerializeField] private float colliderVerticalPosition; 
 
         private void Awake()
         {
@@ -25,12 +27,13 @@ namespace Character.Scripts
         {
             
             _stateController = stateController;
-            _capsuleCollider = stateController.capsuleCollider;
+            _boxCollider = stateController.boxCollider;
             _characterController = stateController.characterController;
             _playerRaycasts = stateController.playerRaycasts;
             _animator = stateController.animator;
             _playerMovement = stateController.playerMovement;
             _playerMovement.movementSpeed = moveSpeed;
+            SetCollisionDimensions();
         }
 
         // Update is called once per frame
@@ -42,6 +45,12 @@ namespace Character.Scripts
         public virtual void ExitState()
         {
             
+        }
+
+        private void SetCollisionDimensions()
+        {
+            _boxCollider.size = colliderDimensions;
+            _boxCollider.center = new Vector3(0, colliderVerticalPosition, 0);
         }
 
         private void OnEnable()

@@ -10,7 +10,7 @@ public class PlayerStateController : MonoBehaviour
     [SerializeField] private PlayerState_Abstract stateCrawling;
     
     [SerializeField] public CharacterController characterController;
-    [SerializeField] public CapsuleCollider capsuleCollider;
+    [SerializeField] public BoxCollider boxCollider;
     [SerializeField] public PlayerRaycasts playerRaycasts;
     [SerializeField] public Animator animator;
     [SerializeField] public PlayerMovement playerMovement;
@@ -29,7 +29,7 @@ public class PlayerStateController : MonoBehaviour
     
     public void SetState(Enum_PlayerStates state)
     {
-        Debug.LogWarning($"ENTERING STATE: {state}");
+        //Debug.LogWarning($"ENTERING STATE: {state}");
         _previousStateEnum = _currentStateEnum;
         _currentStateEnum = state;
         

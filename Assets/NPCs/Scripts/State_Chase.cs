@@ -24,7 +24,8 @@ namespace NPCs.Scripts
             base.UpdateState();
             _canSeePlayer = CanSeePlayer();
             if(_canSeePlayer) UpdatePlayerPosition();
-            if (Vector3.Distance(_lastKnownPlayerPosition, transform.position) < 0.5f)
+            float distanceToTarget = _navMeshAgent.remainingDistance;
+            if (distanceToTarget < 0.1f)
             {
                 if (_canSeePlayer)
                 {
